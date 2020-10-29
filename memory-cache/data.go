@@ -24,7 +24,7 @@ type cache struct {
 	size   uintptr
 }
 
-func (c *cache) Set(key string, value interface{}, ttl time.Duration) error {
+func (c *cache) Set(key string, value interface{}, ttl *time.Duration) error {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
@@ -48,7 +48,9 @@ func (c *cache) Set(key string, value interface{}, ttl time.Duration) error {
 	c.queue = append(c.queue, key)
 	c.size += newItemSize
 
-	time.AfterFunc(ttl, func() { _ = c.Remove(key) })
+	if ttl != nil {
+		time.AfterFunc(*ttl, func() { _ = c.Remove(key) })
+	}
 	return nil
 }
 

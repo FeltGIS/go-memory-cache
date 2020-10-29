@@ -20,7 +20,7 @@ type (
 		OnMemoryExceed      func(memoryUsedPercentage float64, maxMemoryPercentage float64, memoryUsed float64)
 	}
 	Cache interface {
-		Set(key string, value interface{}, ttl time.Duration) error
+		Set(key string, value interface{}, ttl *time.Duration) error
 		Get(key string) (interface{}, error)
 		Remove(key string) error
 		Truncate() error
