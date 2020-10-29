@@ -13,7 +13,7 @@ type (
 	Option struct {
 		MaxEntrySize        int
 		MaxEntriesKey       int
-		MaxEntriesInWindow  int
+		MaxEntriesInWindow  int64
 		MaxPercentageMemory float64
 		OnRemove            func(key string, value interface{})
 		OnRemoveWithReason  func(key string, reason string)
