@@ -1,7 +1,6 @@
 package memory_cache
 
 import (
-	"github.com/paulusrobin/go-memory-cache/logs"
 	"math"
 	"time"
 )
@@ -26,7 +25,6 @@ type (
 		Truncate() error
 		Len() int
 		Size() uintptr
-		Cleaner(time.Duration, <-chan bool)
 		Keys() []string
 	}
 )
@@ -50,7 +48,6 @@ func initializeOption(option Option) Option {
 func NewWithOption(option Option) (Cache, error) {
 	return &cache{
 		option: initializeOption(option),
-		log:    logs.DefaultLog(),
 		data:   make(map[string]interface{}),
 		size:   uintptr(0),
 	}, nil
